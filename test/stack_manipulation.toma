@@ -1,0 +1,26 @@
+# Stampa
+45 print
+
+# Over
+234 5 over print
+
+# Dup
+67 dup print print
+
+# Drop
+45 drop
+
+# Swap
+12 21 swap print
+
+# 2Dup
+12 34 2dup print print print print
+
+# Band
+4 5 band print
+
+# Bor
+34 5 bor print
+
+# Bxor
+78 8 bxor print
