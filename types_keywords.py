@@ -5,23 +5,25 @@ class OpKeywords(Enum):
     OP_MINUS = auto()
     OP_MUL = auto()
     OP_DIV = auto()
+    OP_PRINT = auto()
 
 class OpType(Enum):
     INT = auto()
-    BOOL = auto()
     STR = auto()
+    WORD = auto()
 
-assert len(OpKeywords) == 4, "You have to handle all the OpKeywords"
+assert len(OpKeywords) == 5, "You have to handle all the OpKeywords"
 OpKeywordsMap = {
     '+': OpKeywords.OP_PLUS,
     '-': OpKeywords.OP_MINUS,
     '*': OpKeywords.OP_MUL,
-    '/': OpKeywords.OP_DIV
+    '/': OpKeywords.OP_DIV,
+    'print': OpKeywords.OP_PRINT
 }
 
 assert len(OpType) == 3, "You have to handle all the OpTypes"
 OpTypeMap = {
-    int: OpType.INT,
-    bool: OpType.BOOL,
-    str: OpType.STR
+    'int': OpType.INT,
+    'str': OpType.STR,
+    'WORD': OpType.WORD
 }
