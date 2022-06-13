@@ -8,23 +8,64 @@ def simulate_program(program):
     stack = []
     ip = 0
 
-    """
+    op = [operation[0] for operation in program]
+    row_col = [(operation[1], operation[2]) for operation in program]
+    types = [operation[3] for operation in program]
+
     assert len(OpKeywords) == 5, "You have to handle all the OpOperations"
     while ip < len(program):
-        if program[ip] == OpKeywords.OP_PLUS:
+        if op[ip] == '+':
             a = stack.pop()
             b = stack.pop()
 
+            a = int(a)
+            b = int(b)
+
             stack.append(int(a + b))
+            ip = ip + 1
+
+        elif op[ip] == '-':
+            a = stack.pop()
+            b = stack.pop()
+
+            a = int(a)
+            b = int(b)
+
+            stack.append(int(b - a))
+            ip = ip + 1
+
+        elif op[ip] == '*':
+            a = stack.pop()
+            b = stack.pop()
+
+            a = int(a)
+            b = int(b)
+
+            stack.append(int(b * a))
+            ip = ip + 1
+
+        elif op[ip] == '/':
+            a = stack.pop()
+            b = stack.pop()
+
+            a = int(a)
+            b = int(b)
+
+            stack.append(int(b / a))
+            ip = ip + 1
+
+        elif op[ip] == 'print':
+            a = stack.pop()
+            print(a)
+
             ip = ip + 1
         
         else:
-            if program[ip] in OpKeywordsMap.values() or type(program[ip]) in OpTypeMap:
-                stack.append(program[ip])
+            if types[ip] in OpType:
+                stack.append(op[ip])
                 ip = ip + 1
             else:
                 assert False, "unreachable"
-        """
 
 if __name__ == '__main__':
     
@@ -35,7 +76,6 @@ if __name__ == '__main__':
 
     #Parsing
     program = parse_file_to_tokens(program_path, program)
-    print(program)
 
     #Simulate
     simulate_program(program)
