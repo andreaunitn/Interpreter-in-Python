@@ -12,14 +12,11 @@ def simulate_program(program):
     row_col = [(operation[1], operation[2]) for operation in program]
     types = [operation[3] for operation in program]
 
-    assert len(OpKeywords) == 5, "You have to handle all the OpOperations"
+    assert len(OpKeywords) == 12, "You have to handle all the OpOperations"
     while ip < len(program):
         if op[ip] == '+':
             a = stack.pop()
             b = stack.pop()
-
-            a = int(a)
-            b = int(b)
 
             stack.append(int(a + b))
             ip = ip + 1
@@ -28,18 +25,12 @@ def simulate_program(program):
             a = stack.pop()
             b = stack.pop()
 
-            a = int(a)
-            b = int(b)
-
             stack.append(int(b - a))
             ip = ip + 1
 
         elif op[ip] == '*':
             a = stack.pop()
             b = stack.pop()
-
-            a = int(a)
-            b = int(b)
 
             stack.append(int(b * a))
             ip = ip + 1
@@ -48,10 +39,56 @@ def simulate_program(program):
             a = stack.pop()
             b = stack.pop()
 
-            a = int(a)
-            b = int(b)
-
             stack.append(int(b / a))
+            ip = ip + 1
+
+        elif op[ip] == '=':
+            a = stack.pop()
+            b = stack.pop()
+
+            stack.append(int(b == a))
+            ip = ip + 1
+
+        elif op[ip] == '!=':
+            a = stack.pop()
+            b = stack.pop()
+
+            stack.append(int(b != a))
+            ip = ip + 1
+
+        elif op[ip] == '>':
+            a = stack.pop()
+            b = stack.pop()
+
+            stack.append(int(b > a))
+            ip = ip + 1
+
+        elif op[ip] == '<':
+            a = stack.pop()
+            b = stack.pop()
+
+            stack.append(int(b < a))
+            ip = ip + 1
+
+        elif op[ip] == '>=':
+            a = stack.pop()
+            b = stack.pop()
+
+            stack.append(int(b >= a))
+            ip = ip + 1
+        
+        elif op[ip] == '<=':
+            a = stack.pop()
+            b = stack.pop()
+
+            stack.append(int(b <= a))
+            ip = ip + 1
+
+        elif op[ip] == 'mod':
+            a = stack.pop()
+            b = stack.pop()
+
+            stack.append(int(b % a))
             ip = ip + 1
 
         elif op[ip] == 'print':

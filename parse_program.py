@@ -3,7 +3,7 @@ from colors import *
 
 #CHECK KEYWORD
 def check_keyword(word, row, col, tp):
-    assert len(OpKeywords) == 5, "You have to handle all the OpKeywords"
+    assert len(OpKeywords) == 12, "You have to handle all the OpKeywords"
     if tp == OpType.WORD:
         if not (word in OpKeywordsMap.keys()):
             print(colors.FAIL + "ERROR" + colors.ENDC + ": undefined token " + colors.WARNING + "'%s'" % word + colors.ENDC + " at %d:%d" % (row, col))
@@ -13,16 +13,16 @@ def check_keyword(word, row, col, tp):
 def check_type(word):
     assert len(OpType) == 3, "You have to handle all the OpTypes"
     if word.isnumeric():
-        return OpTypeMap['int']
+        return OpTypeMap['int'], int(word)
     elif word[0] == '"':
         l = len(word)
 
         if word[l-1] == '"':
-            return OpTypeMap['str']
+            return OpTypeMap['str'], None
         else:
-            return OpTypeMap['WORD']
+            return OpTypeMap['WORD'], None
     else:
-        return OpTypeMap['WORD']
+        return OpTypeMap['WORD'], None
 
 #PARSE FILE INTO TOKENS
 def parse_file_to_tokens(program_path, program):
@@ -50,9 +50,14 @@ def parse_file_to_tokens(program_path, program):
 
                         if word in words:
 
-                            tp = check_type(word)
+                            tp, elem = check_type(word)
                             check_keyword(word, row, col - len(str(word)) + 1, tp)
-                            token = (word, row, col - len(str(word)) + 1, tp)
+
+                            if elem != None:
+                                token = (elem, row, col - len(str(word)) + 1, tp)
+                            else: 
+                                token = (word, row, col - len(str(word)) + 1, tp)
+
                             program.append(token)
                             word = ''
         
