@@ -48,19 +48,20 @@ def parse_file_to_tokens(program_path, program):
                     else:
                         word += line[col-1]
 
-                        if word in words:
+                if line[col - 1].isspace() or col == length:
+                    if word in words:
 
-                            tp, elem = check_type(word)
-                            check_keyword(word, row, col - len(str(word)) + 1, tp)
+                        tp, elem = check_type(word)
+                        check_keyword(word, row, col - len(str(word)) + 1, tp)
 
-                            if elem != None:
-                                token = (elem, row, col - len(str(word)) + 1, tp)
-                            else: 
-                                token = (word, row, col - len(str(word)) + 1, tp)
+                        if elem != None:
+                            token = (elem, row, col - len(str(word)) + 1, tp)
+                        else: 
+                            token = (word, row, col - len(str(word)) + 1, tp)
 
-                            program.append(token)
-                            word = ''
+                        program.append(token)
+                        word = ''
         
             row = row + 1
-    
+
     return program
