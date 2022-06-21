@@ -12,7 +12,7 @@ def simulate_program(program):
     row_col = [(operation[1], operation[2]) for operation in program]
     types = [operation[3] for operation in program]
 
-    assert len(OpKeywords) == 12, "You have to handle all the OpOperations"
+    assert len(OpKeywords) == 20, "You have to handle all the OpOperations"
     while ip < len(program):
         if op[ip] == '+':
             a = stack.pop()
@@ -96,7 +96,69 @@ def simulate_program(program):
             print(a)
 
             ip = ip + 1
+
+        elif op[ip] == 'over':
+            a = stack.pop()
+            b = stack.pop()
+
+            stack.append(b)
+            stack.append(a)
+            stack.append(b)
+            ip = ip + 1
+
+        elif op[ip] == 'dup':
+            a = stack.pop()
+
+            stack.append(a)
+            stack.append(a)
+            ip = ip + 1
+
+        elif op[ip] == 'drop':
+            stack.pop()
+            ip = ip + 1
+
+        elif op[ip] == 'swap':
+            a = stack.pop()
+            b = stack.pop()
+
+            stack.append(a)
+            stack.append(b)
+            ip = ip + 1
         
+        elif op[ip] == '2dup':
+            a = stack.pop()
+            b = stack.pop()
+
+            stack.append(a)
+            stack.append(b)
+            stack.append(a)
+            stack.append(b)
+            ip = ip + 1
+
+        elif op[ip] == 'band':
+            a = stack.pop()
+            b = stack.pop()
+
+            stack.append(b & a)
+            ip = ip + 1
+
+        elif op[ip] == 'bor':
+            a = stack.pop()
+            b = stack.pop()
+
+            stack.append(b | a)
+            ip = ip + 1
+
+        elif op[ip] == 'bxor':
+            a = stack.pop()
+            b = stack.pop()
+
+            stack.append(b ^ a)
+            ip = ip + 1
+
+        elif op[ip] == 'if':
+            print("sus")
+
         else:
             if types[ip] in OpType:
                 stack.append(op[ip])

@@ -26,7 +26,7 @@ for test in test_cases:
 
 def check():
     for file in filtered:
-        result = subprocess.run(["python3", "interpreter.py", DIR + file], stdout = subprocess.PIPE)
+        result = subprocess.run(["python3", "inter.py", DIR + file], stdout = subprocess.PIPE)
         std = (result.stdout).decode('utf-8')
 
         origin = DIR + file.rsplit('.', 1)[0] + '.txt'
@@ -34,6 +34,9 @@ def check():
             with open(origin, 'r') as ori:
                 data = ori.read()
 
+            data = data.split()
+            std = std.split()
+            
             if data == std:
                 print(file + ": " + colors.OKGREEN + "OK" + colors.ENDC)
         else:
@@ -41,12 +44,12 @@ def check():
 
 def record():
     for file in filtered:
-        result = subprocess.run(["python3", "interpreter.py", DIR + file], stdout = subprocess.PIPE)
-        std = result.stdout
+        result = subprocess.run(["python3", "inter.py", DIR + file], stdout = subprocess.PIPE)
+        std = (result.stdout).decode('utf-8').replace("\r", "")
 
         destination = DIR + file.rsplit('.', 1)[0] + '.txt'
         with open(destination, 'w+') as dst:
-            dst.write(std.decode('utf-8'))
+            dst.write(std)
 
 if __name__ == '__main__':
 

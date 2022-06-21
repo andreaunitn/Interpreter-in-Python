@@ -3,7 +3,7 @@ from colors import *
 
 #CHECK KEYWORD
 def check_keyword(word, row, col, tp):
-    assert len(OpKeywords) == 12, "You have to handle all the OpKeywords"
+    assert len(OpKeywords) == 25, "You have to handle all the OpKeywords"
     if tp == OpType.WORD:
         if not (word in OpKeywordsMap.keys()):
             print(colors.FAIL + "ERROR" + colors.ENDC + ": undefined token " + colors.WARNING + "'%s'" % word + colors.ENDC + " at %d:%d" % (row, col))

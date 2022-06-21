@@ -14,13 +14,27 @@ class OpKeywords(Enum):
     OP_MOD = auto()
 
     OP_PRINT = auto()
+    OP_OVER = auto()
+    OP_DUP = auto()
+    OP_DROP = auto()
+    OP_SWAP = auto()
+    OP_2DUP = auto()
+    OP_BAND = auto()
+    OP_BOR = auto()
+    OP_BXOR = auto()
+
+    OP_IF = auto()
+    OP_ELSE = auto()
+    OP_END = auto()
+    OP_WHILE = auto()
+    OP_DO = auto()
 
 class OpType(Enum):
     INT = auto()
     STR = auto()
     WORD = auto()
 
-assert len(OpKeywords) == 12, "You have to handle all the OpKeywords"
+assert len(OpKeywords) == 25, "You have to handle all the OpKeywords"
 OpKeywordsMap = {
     '+': OpKeywords.OP_PLUS,
     '-': OpKeywords.OP_MINUS,
@@ -34,7 +48,21 @@ OpKeywordsMap = {
     '<=': OpKeywords.OP_LET,
     'mod': OpKeywords.OP_MOD,
 
-    'print': OpKeywords.OP_PRINT
+    'print': OpKeywords.OP_PRINT,
+    'over': OpKeywords.OP_OVER,
+    'dup': OpKeywords.OP_DUP,
+    'drop': OpKeywords.OP_DROP,
+    'swap': OpKeywords.OP_SWAP,
+    '2dup': OpKeywords.OP_2DUP,
+    'band': OpKeywords.OP_BAND,
+    'bor': OpKeywords.OP_BOR,
+    'bxor': OpKeywords.OP_BXOR,
+
+    'if': OpKeywords.OP_IF,
+    'else': OpKeywords.OP_ELSE,
+    'end': OpKeywords.OP_END,
+    'while': OpKeywords.OP_WHILE,
+    'do': OpKeywords.OP_DO,
 }
 
 assert len(OpType) == 3, "You have to handle all the OpTypes"
